@@ -1,0 +1,113 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    outline: none;
+}
+
+body {
+    background-color: #FFFFFF;
+}
+
+.logo {
+    width: 300px;
+    display: block;
+    margin: 25px auto;
+}
+
+main {
+    width: 375px;
+    background: #F4F4F4;
+    border-radius: 20px;
+    margin: 0 auto 60px;
+    padding: 44px 24px 30px;
+}
+
+label {
+    color: #008B8B;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+select,
+input {
+    border-radius: 4px;
+    border: 1px solid #5F9EA0;
+    background: #FFF;
+    height: 48px;
+    width: 100%;
+    margin-bottom: 24px;
+    appearance: none;
+    padding-left: 18px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #4f8080;
+    cursor: pointer;
+}
+
+button {
+    width: 100%;
+    border-radius: 5px;
+    background: #20B2AA;
+    border: none;
+    height: 48px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #FFF;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+button:active {
+    opacity: 0.6;
+}
+
+section {
+    border-radius: 20px;
+    border: 1px solid #5F9EA0;
+    margin-top: 36px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Real {
+    width: 44px;
+    height: 44px;
+}
+
+.Seta {
+    width: 44px;
+    height: 44px;
+    margin: 15px 0;
+}
+
+.currency-img {
+    width: 44px;
+    height: 44px;
+}
+
+.currency-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.currency {
+    color: #008B8B;
+    font-size: 14px;
+
+}
+
+.currency-value, .currency-value-to-convert {
+    color: #008080;
+    font-size: 20px;
+    font-weight: 700;
+
+}
