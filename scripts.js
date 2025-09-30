@@ -43,6 +43,13 @@ const currencies = {
         locale: "es-AR",
         symbol: "ARS",
         image: "./assets/Peso.png"
+    },
+    bitcoin: {
+        name: "Bitcoin",
+        rate: 608409.02, // 1 Bitcoin vale 608409.02 Reais
+        locale: "XBT",
+        symbol: "BTC",
+        image: "./assets/Bitcoin.png"
     }
 };
 
