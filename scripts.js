@@ -1,54 +1,88 @@
 
-const convertButton = document.querySelector(".convert-button")
-const currencySelect = document.querySelector(".currency-select")
+// Seleciona os elementos do HTML uma única vez
+const convertButton = document.querySelector(".convert-button");
+const currencySelect = document.querySelector(".currency-select");
+const currencyValueToConvert = document.querySelector(".currency-value-to-convert"); // Valor em Real
+const currencyValueConverted = document.querySelector(".currency-value"); // Valor convertido
+const currencyName = document.getElementById("currency-name");
+const currencyImage = document.querySelector(".currency-img");
 
-function convertValues() {
-    const inputCurrencyValue = document.querySelector(".input-currency").value
-    const currencyValueToConvert = document.querySelector(".currency-value-to-convert") /* Valor em Real */
-    const currencyValueToConvertd = document.querySelector(".currency-value") /* Outras moedas */
-
-    const dolarToday = 5.36
-    const euroToday = 6.26
-
-    if (currencySelect.value == "dolar") {
-        // Se o select estiver selecionado o valor de dolar, entre aqui.
-        currencyValueToConvertd.innerHTML = new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD"
-        }).format(inputCurrencyValue / dolarToday)
+// --- Central de Informações das Moedas ---
+// Todas as informações ficam em um só lugar. Adicionar uma nova moeda é muito fácil!
+const currencies = {
+    real: {
+        name: "Real",
+        locale: "pt-BR",
+        symbol: "BRL",
+        image: "./assets/Real.png"
+    },
+    dolar: {
+        name: "Dólar",
+        rate: 5.36, // 1 Dólar vale 5.36 Reais
+        locale: "en-US",
+        symbol: "USD",
+        image: "./assets/Dolar.png"
+    },
+    euro: {
+        name: "Euro",
+        rate: 6.26,
+        locale: "de-DE",
+        symbol: "EUR",
+        image: "./assets/Euro.png"
+    },
+    guarani: {
+        name: "Guarani",
+        rate: 0.00072, // 1 Guarani vale 0.00072 Reais
+        locale: "es-PY",
+        symbol: "PYG",
+        image: "./assets/Guarani.png"
+    },
+    peso: {
+        name: "Peso",
+        rate: 0.0040, // 1 Peso vale 0.0040 Reais
+        locale: "es-AR",
+        symbol: "ARS",
+        image: "./assets/Peso.png"
     }
+};
 
-    if (currencySelect.value == "euro") {
-        // Se o select estiver selecionado o valor de euro, entre aqui.
-        currencyValueToConvertd.innerHTML = new Intl.NumberFormat("de-DE", {
-            style: "currency",
-            currency: "EUR"
-        }).format(inputCurrencyValue / euroToday)
-    }
-
-    currencyValueToConvert.innerHTML = new Intl.NumberFormat("pt-BR", {
+// Função para formatar valores
+function formatCurrency(value, locale, currencySymbol) {
+    return new Intl.NumberFormat(locale, {
         style: "currency",
-        currency: "BRL"
-    }).format(inputCurrencyValue)
-
+        currency: currencySymbol,
+    }).format(value);
 }
 
+// Função principal de conversão
+function convertValues() {
+    const inputCurrencyValue = parseFloat(document.querySelector(".input-currency").value) || 0;
+    const selectedCurrencyKey = currencySelect.value;
+    const targetCurrency = currencies[selectedCurrencyKey];
+
+    // Formata e exibe o valor em Real (o valor que está sendo convertido)
+    currencyValueToConvert.innerHTML = formatCurrency(inputCurrencyValue, currencies.real.locale, currencies.real.symbol);
+
+    // Calcula, formata e exibe o valor convertido
+    const convertedValue = inputCurrencyValue / targetCurrency.rate;
+    currencyValueConverted.innerHTML = formatCurrency(convertedValue, targetCurrency.locale, targetCurrency.symbol);
+}
+
+// Função que troca a imagem e o nome da moeda
 function changeCurrency() {
-    const currencyName = document.getElementById("currency-name")
-    const currencyImage = document.querySelector(".currency-img")
+    const selectedCurrencyKey = currencySelect.value;
+    const newCurrency = currencies[selectedCurrencyKey];
 
-    if (currencySelect.value == "dolar") {
-        currencyName.innerHTML = "Dólar"
-        currencyImage.src = "./assets/Dolar.png"
-    }
+    currencyName.innerHTML = newCurrency.name;
+    currencyImage.src = newCurrency.image;
 
-    if (currencySelect.value == "euro") {
-        currencyName.innerHTML = "Euro"
-        currencyImage.src = "./assets/Euro.png"
-    }
-
-    convertValues()
+    // Converte os valores automaticamente ao trocar a moeda
+    convertValues();
 }
 
-currencySelect.addEventListener("change", changeCurrency)
-convertButton.addEventListener("click", convertValues)
+// Adiciona os "escutadores" de eventos
+currencySelect.addEventListener("change", changeCurrency);
+convertButton.addEventListener("click", convertValues);
+
+// Chama a função para garantir que a tela inicie com a formatação correta
+changeCurrency();

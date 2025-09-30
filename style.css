@@ -89,7 +89,7 @@ section {
 
 .currency-img {
     width: 44px;
-    height: 44px;
+    height: 44px; 
 }
 
 .currency-box {
@@ -102,7 +102,6 @@ section {
 .currency {
     color: #008B8B;
     font-size: 14px;
-
 }
 
 .currency-value, .currency-value-to-convert {
