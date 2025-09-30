@@ -1,4 +1,5 @@
 
+
 // Seleciona os elementos do HTML uma única vez
 const convertButton = document.querySelector(".convert-button");
 const currencySelect = document.querySelector(".currency-select");
